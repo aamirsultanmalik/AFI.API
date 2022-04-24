@@ -34,15 +34,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+EnsureDatabaseCreated();
+
 app.Run();
 
 void EnsureDatabaseCreated()
 {
     var optionsBuilder = new DbContextOptionsBuilder();
-    if (app.Environment.IsDevelopment()) optionsBuilder.UseSqlite(app.Configuration["AFI"]);
+    if (app.Environment.IsDevelopment()) optionsBuilder.UseSqlite(app.Configuration.GetConnectionString("AFI"));
 
     var context = new AFIDbContext(optionsBuilder.Options);
+    //context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
 }
 
-EnsureDatabaseCreated();
