@@ -1,4 +1,6 @@
 ﻿using AFI.Application.Services;
+using AFI.Application.Services.Customer.ViewModels;
+using AFI.Application.Services.CustomerReg;
 using AFI.Domain.Entities.Customer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +24,7 @@ namespace AFI.API.Controllers
         }
 
         [HttpPost("RegisterCustomer")]
-        public async Task<IActionResult> Insert(Customer customer)
+        public async Task<ActionResult<List<CustomerListViewModel>>> Insert(CustomerViewModel customer)
         {
             return Ok(await _customerService.RegisterCustomer(customer));
         }

@@ -1,4 +1,5 @@
 using AFI.Application.Services;
+using AFI.Application.Services.CustomerReg;
 using AFI.Infrastructure;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -34,3 +35,14 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void EnsureDatabaseCreated()
+{
+    var optionsBuilder = new DbContextOptionsBuilder();
+    if (app.Environment.IsDevelopment()) optionsBuilder.UseSqlite(app.Configuration["AFI"]);
+
+    var context = new AFIDbContext(optionsBuilder.Options);
+    context.Database.EnsureCreated();
+}
+
+EnsureDatabaseCreated();
