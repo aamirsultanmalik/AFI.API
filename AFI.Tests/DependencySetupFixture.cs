@@ -10,7 +10,7 @@ public class DependencySetupFixture
     public DependencySetupFixture()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddDbContext<IAFIDbContext, AFIDbContext>(options => options.UseSqlite("Data Source=AFI.db"), ServiceLifetime.Transient);
+        serviceCollection.AddDbContext<IAFIDbContext, AFIDbContext>(options => options.UseSqlite("Data Source=AFI.db"));
         serviceCollection.AddTransient<ICustomerService, CustomerService>();
 
 

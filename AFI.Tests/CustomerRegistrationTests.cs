@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AFI.Application.Services;
 using AFI.Application.Services.Customer.ViewModels;
 using AFI.Application.Services.CustomerReg;
+using AFI.Infrastructure;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,10 @@ namespace AFI.Tests
         public CustomerRegistrationTests(DependencySetupFixture fixture)
         {
             CustomerService = fixture.ServiceProvider.GetRequiredService<ICustomerService>();
+            var dbContext = fixture.ServiceProvider.GetRequiredService<AFIDbContext>();
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+            
             _customerValidator = new CustomerValidator();
         }
 
