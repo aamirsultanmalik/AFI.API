@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+AFI.db
+AFI.db-shm
+AFI.db-wal
+
 # User-specific files
 *.rsuser
 *.suo
